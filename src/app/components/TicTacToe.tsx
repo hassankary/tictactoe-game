@@ -84,8 +84,8 @@ export default function TicTacToe() {
 
   return (
     <div className="h-screen flex flex-col justify-center font-sans bg-gray-900">
-      <div className="flex flex-col justify-center items-center px-[5%] font-bold text-center text-2xl space-y-2">
-        <h1 className=" text-[28px]">
+      <div className="flex flex-col justify-center items-center px-[5%] font-bold text-white text-center text-2xl space-y-2">
+        <h1 className="text-[28px]">
           Tic Tac Toe Game by{" "}
           <span className="text-emerald-400">Hassankary</span>
         </h1>
