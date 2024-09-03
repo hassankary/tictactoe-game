@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import { RiCloseLargeFill } from "react-icons/ri";
+import { FaRegCircle } from "react-icons/fa";
 
 export default function TicTacToe() {
   const [count, setCount] = useState<number>(0);
@@ -84,39 +86,57 @@ export default function TicTacToe() {
 
   return (
     <div className="h-screen flex flex-col justify-center font-sans bg-gray-900">
-      <div className="flex flex-col justify-center items-center px-[5%] font-bold text-white text-center text-2xl space-y-2">
+      <div className="flex flex-col justify-center items-center px-[5%] font-bold text-white text-center text-2xl space-y-2 transition-all duration-500 ease-in-out">
         <h1 className="text-[28px]">
           Tic Tac Toe Game by{" "}
           <span className="text-emerald-400">Hassankary</span>
         </h1>
-        {theWinner !== "" && theWinner !== "draw" ? (
-          <h1>
-            &quot;Congratulations to{" "}
-            <span className="text-emerald-400 transition-all duration-500 ease-in-out">
-              {theWinner}
-            </span>
-            &quot;
-          </h1>
-        ) : theWinner === "draw" ? (
-          <h1 className="text-emerald-400 uppercase transition-all duration-500 ease-in-out">
-            &quot;{theWinner}&quot;
-          </h1>
-        ) : null}
       </div>
       <div className="flex flex-col justify-center items-center gap-y-2 py-5">
-        <div className="grid grid-cols-3 gap-2">
+        <div
+          className={`${
+            lock ? "opacity-100  bg-opacity-50 z-20" : "opacity-0"
+          } absolute flex w-full h-full max-w-[316px] max-h-[316px] md:max-w-[496px] md:max-h-[496px] bg-black rounded-md transition-all duration-1000 ease-in-out"`}
+        >
+          {theWinner !== "" && theWinner !== "draw" ? (
+            <div
+              className={`${
+                theWinner === "X" ? "text-emerald-400" : "text-orange-300"
+              } w-full flex flex-col justify-center items-center gap-4 text-8xl md:text-9xl text-center my-auto font-semibold transition-all duration-1000 ease-in-out`}
+            >
+              {theWinner === "X" ? <RiCloseLargeFill /> : <FaRegCircle />}{" "}
+              <span className="uppercase text-5xl md:text-7xl">Win</span>
+            </div>
+          ) : null}
+          {theWinner === "draw" ? (
+            <div className="w-full flex flex-col justify-center items-center gap-4 text-8xl md:text-9xl text-center my-auto font-semibold transition-all duration-1000 ease-in-out">
+              <div className="flex justify-center items-center">
+                <RiCloseLargeFill className="text-emerald-400" />
+                <FaRegCircle className="text-orange-300" />
+              </div>
+              <span className="uppercase text-5xl md:text-7xl text-white">{theWinner}</span>
+            </div>
+          ) : null}
+        </div>
+        <div className="grid grid-cols-3 gap-2 max-w-[496px] z-10">
           {data.map((d, i) => {
             return (
               <div
                 onClick={(e) => toggle(e, i)}
                 key={i}
                 className={`${
-                  d === "X" ? "text-emerald-400" : "text-orange-300"
-                } ${
+                  d === "X"
+                    ? "text-emerald-400"
+                    : d === "O"
+                    ? "text-orange-300"
+                    : "text-slate-500"
+                } 
+                ${
                   dataWin.includes(i.toString()) ? "bg-red-500" : "bg-slate-800"
-                } flex justify-center items-center text-5xl rounded-md h-[100px] w-[100px] md:h-[160px] md:w-[160px] transition-all duration-500 ease-in-out`}
+                } flex justify-center items-center text-5xl md:text-7xl rounded-md h-[100px] w-[100px] md:h-[160px] md:w-[160px] transition-all duration-500 ease-in-out`}
               >
-                {d}
+                {d === "X" ? <RiCloseLargeFill /> : null}
+                {d === "O" ? <FaRegCircle /> : null}
               </div>
             );
           })}
